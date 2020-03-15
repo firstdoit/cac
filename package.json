@@ -18,6 +18,7 @@
     "test": "jest",
     "test:cov": "jest --coverage",
     "build": "tsc -m ESNext && rollup -c",
+    "dts": "dts-bundle-generator --external-inlines=events,node -o mod.d.ts types/index.d.ts",
     "toc": "markdown-toc -i README.md",
     "prepublishOnly": "npm run build",
     "docs:api": "typedoc --out api-doc --readme none --exclude \"**/__test__/**\" --theme minimal"
@@ -31,6 +32,7 @@
     "@types/jest": "^23.3.9",
     "@types/mri": "^1.1.0",
     "cz-conventional-changelog": "^2.1.0",
+    "dts-bundle-generator": "^3.3.1",
     "eslint-config-rem": "^3.0.0",
     "events": "^3.0.0",
     "execa": "^1.0.0",

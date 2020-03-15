@@ -1,7 +1,6 @@
-/// <reference types="node" />
 import { EventEmitter } from 'events'
 
-interface OptionConfig {
+export interface OptionConfig {
   default?: any
   type?: any[]
 }
@@ -18,22 +17,21 @@ declare class Option {
   negated: boolean
   constructor(rawName: string, description: string, config?: OptionConfig)
 }
-
-interface CommandArg {
+export interface CommandArg {
   required: boolean
   value: string
   variadic: boolean
 }
-interface HelpSection {
+export interface HelpSection {
   title?: string
   body: string
 }
-interface CommandConfig {
+export interface CommandConfig {
   allowUnknownOptions?: boolean
   ignoreOptionDefaultValue?: boolean
 }
-declare type HelpCallback = (sections: HelpSection[]) => void
-declare type CommandExample = ((bin: string) => string) | string
+export declare type HelpCallback = (sections: HelpSection[]) => void
+export declare type CommandExample = ((bin: string) => string) | string
 declare class Command {
   rawName: string
   description: string
@@ -98,8 +96,7 @@ declare class Command {
 declare class GlobalCommand extends Command {
   constructor(cli: CAC)
 }
-
-interface ParsedArgv {
+export interface ParsedArgv {
   args: ReadonlyArray<string>
   options: {
     [k: string]: any
@@ -194,11 +191,7 @@ declare class CAC extends EventEmitter {
   private mri
   runMatchedCommand(): any
 }
-
-/**
- * @param name The program name to display in help and version message
- */
 declare const cac: (name?: string) => CAC
-
 export default cac
-export { cac }
+
+export {}
