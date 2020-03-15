@@ -284,7 +284,9 @@ const deno = typeof window !== 'undefined' && window.Deno;
 const denoScriptPath = deno && typeof window !== 'undefined' && window.location.pathname;
 // Adds deno executable and script path to processArgs as "compatibility" layer for node
 // See https://github.com/cacjs/cac/issues/69
-const processArgs = deno ? ['deno', denoScriptPath].concat(Deno.args) : process.argv;
+const processArgs = deno
+    ? ['deno', denoScriptPath].concat(Deno.args)
+    : process.argv;
 const platformInfo = deno
     ? `${Deno.build.os}-${Deno.build.arch} deno-${Deno.version.deno}`
     : `${process.platform}-${process.arch} node-${process.version}`;
@@ -603,7 +605,7 @@ class CAC extends events.EventEmitter {
             const commandName = parsed.args[0];
             if (command.isMatched(commandName)) {
                 shouldParse = false;
-                const parsedInfo = Object.assign({}, parsed, { args: parsed.args.slice(1) });
+                const parsedInfo = Object.assign(Object.assign({}, parsed), { args: parsed.args.slice(1) });
                 this.setParsedInfo(parsedInfo, command, commandName);
                 this.emit(`command:${commandName}`, command);
             }
@@ -657,7 +659,7 @@ class CAC extends events.EventEmitter {
         }
         let parsed = lib(argv, mriOptions);
         parsed = Object.keys(parsed).reduce((res, name) => {
-            return Object.assign({}, res, { [camelcaseOptionName(name)]: parsed[name] });
+            return Object.assign(Object.assign({}, res), { [camelcaseOptionName(name)]: parsed[name] });
         }, { _: [] });
         const args = parsed._;
         delete parsed._;

@@ -1,3 +1,5 @@
+import dts from 'rollup-plugin-dts'
+
 function createConfig(target) {
   const deno = target === 'deno'
   return {
@@ -21,4 +23,12 @@ function createConfig(target) {
   }
 }
 
-export default [createConfig('node'), createConfig('deno')]
+export default [
+  createConfig('node'),
+  createConfig('deno'),
+  {
+    input: 'types/index.d.ts',
+    output: [{ file: 'mod.d.ts', format: 'es' }],
+    plugins: [dts()]
+  }
+]

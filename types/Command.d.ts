@@ -55,8 +55,8 @@ declare class Command {
    * @param name Command name
    */
   isMatched(name: string): boolean
-  readonly isDefaultCommand: boolean
-  readonly isGlobalCommand: boolean
+  get isDefaultCommand(): boolean
+  get isGlobalCommand(): boolean
   /**
    * Check if an option is registered in this command
    * @param name Option name
